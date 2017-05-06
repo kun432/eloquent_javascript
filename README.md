@@ -9,7 +9,9 @@
 
 ### 2. Program Structure
 
-#### Looping a triangle
+#### Excercise
+
+##### Looping a triangle
 
 ```javascript
 var str = "";
@@ -19,7 +21,7 @@ while(str.length < 7){
 }
 ```
 
-#### FizzBuzz
+##### FizzBuzz
 
 ```javascript
 for (var i = 1; i <= 100; i++){
@@ -72,4 +74,114 @@ function getColor(x, y){
     }
     return str;
 }
+```
+
+### 3. Functions
+
+#### Excercise
+
+##### Minimum
+
+```js
+var min = function (a, b) {
+    return a < b ? a : b; 
+};
+```
+
+##### Recursion
+
+```js
+var isEven = function (i) {
+    var num = i;
+    if (num == 0){
+        return true;
+    } else if (num == 1) {
+        return false;
+    } else {
+        return isEven(num - 2);
+    }
+};
+```
+
+テスト
+
+```
+> isEven(50);
+true
+> isEven(75);
+false
+> isEven(-1);
+RangeError: Maximum call stack size exceeded
+    at isEven (repl:1:29)
+    at isEven (repl:8:8)
+    at isEven (repl:8:8)
+    at isEven (repl:8:8)
+    at isEven (repl:8:8)
+    at isEven (repl:8:8)
+    at isEven (repl:8:8)
+    at isEven (repl:8:8)
+    at isEven (repl:8:8)
+    at isEven (repl:8:8)
+```
+
+-1以下だと無限になってしまうので修正
+
+```js
+var isEven = function (i) {
+    var num = i;
+    if (num == 0){
+        return true;
+    } else if (num == 1) {
+        return false;
+    } else {
+        if(num > 0) { 
+            return isEven(num - 2);
+        } else {
+            return isEven(num + 2);
+        }
+    }
+};
+```
+
+結果
+
+```
+> isEven(50);
+true
+> isEven(75);
+false
+> isEven(1);
+false
+> isEven(0);
+true
+> isEven(-1);
+false
+> isEven(-50);
+true
+> isEven(-75);
+false
+```
+
+絶対値とかにすればいいのかなと思うけど、%2でできることをわざわざこんなふうにやってるのだから、あんまり美しくないけどまあいいか。
+
+##### Bean counting 
+
+```js
+var countBs = function (s) {
+    var count = 0;
+    for (var i = 0; i < s.length; i++) {
+        if (s[i] == "B") count++;
+    }
+    return count;
+};
+```
+
+```js
+var countChar = function (s,c) {
+    var count = 0;
+    for (var i = 0; i < s.length; i++) {
+        if (s[i] == c) count++;
+    }
+    return count;
+};
 ```
